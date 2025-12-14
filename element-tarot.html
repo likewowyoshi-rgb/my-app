@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>エレメントタロット</title>
+  <style>
+:root{
+  --bg1:#070714;
+  --bg2:#0a1440;
+  --bg3:#0b2b6b;
+  --ink:#f3f1e8;
+  --muted:rgba(243,241,232,.75);
+
+  --gold1:#fff2a8;
+  --gold2:#d8b04b;
+  --gold3:#8b5e1f;
+
+  --wine:#2a0712;
+  --wine2:#3c0a1a;
+
+  --aqua:#1ee3ff;
+  --vio:#b68cff;
+  --hot:#ff56b8;
+
+  --shadow: 0 24px 90px rgba(0,0,0,.6);
+  --radius: 22px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  color:var(--ink);
+  font-family: system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;
+  background:
+    radial-gradient(1200px 900px at 15% 20%, rgba(182,140,255,.35), transparent 60%),
+    radial-gradient(900px 700px at 85% 30%, rgba(30,227,255,.25), transparent 60%),
+    radial-gradient(900px 700px at 55% 88%, rgba(255,86,184,.18), transparent 65%),
+    linear-gradient(180deg, var(--bg1), var(--bg2) 50%, var(--bg3));
+  overflow-x:hidden;
+}
+
+/* 星粒 */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-80px;
+  pointer-events:none;
+  opacity:.35;
+  background:
+    radial-gradient(1px 1px at 8% 12%, #fff, transparent),
+    radial-gradient(1px 1px at 22% 28%, #fff, transparent),
+    radial-gradient(1px 1px at 60% 18%, #fff, transparent),
+    radial-gradient(1px 1px at 84% 36%, #fff, transparent),
+    radial-gradient(1px 1px at 15% 78%, #fff, transparent),
+    radial-gradient(1px 1px at 46% 64%, #fff, transparent),
+    radial-gradient(1px 1px at 88% 82%, #fff, transparent);
+  filter: drop-shadow(0 0 10px rgba(255,255,255,.15));
+  animation: drift 16s ease-in-out infinite;
+}
+@keyframes drift{
+  0%{ transform: translateY(0); }
+  50%{ transform: translateY(14px); }
+  100%{ transform: translateY(0); }
+}
+
+.page{
+  width:min(980px, 92vw);
+  margin: 26px auto 40px;
+}
+
+/* ====== HERO ====== */
+.hero{
+  position: relative;
+  padding: 20px 14px 14px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.18));
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(800px 240px at 50% 20%, rgba(255,242,168,.18), transparent 55%),
+    radial-gradient(900px 260px at 10% 10%, rgba(182,140,255,.18), transparent 60%),
+    radial-gradient(900px 260px at 90% 30%, rgba(30,227,255,.12), transparent 60%);
+  pointer-events:none;
+}
+.heroTopLine{
+  position:relative;
+  text-align:center;
+  font-weight:900;
+  letter-spacing:.12em;
+  color: rgba(255,255,255,.88);
+}
+.heroCatch{
+  position:relative;
+  margin-top: 8px;
+  text-align:center;
+  color: rgba(255,255,255,.85);
+  letter-spacing:.08em;
+}
+.heroTitle{
+  position:relative;
+  margin: 10px 0 0;
+  text-align:center;
+  font-size: clamp(44px, 6vw, 78px);
+  letter-spacing:.06em;
+  line-height:1.08;
+}
+.titleGlow{
+  background: linear-gradient(180deg, var(--gold1), var(--gold2) 55%, var(--gold3));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:
+    0 2px 0 rgba(0,0,0,.35),
+    0 0 28px rgba(255,242,168,.25),
+    0 0 60px rgba(182,140,255,.18);
+}
+.heroSub{
+  position:relative;
+  text-align:center;
+  margin-top: 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing:.18em;
+  color: rgba(255,242,168,.9);
+  text-shadow: 0 0 18px rgba(255,242,168,.2);
+}
+
+/* ====== STAGE ====== */
+.stageWrap{ margin-top: 16px; }
+
+.frame{
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.32);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  position:relative;
+}
+.frame::before{
+  content:"";
+  position:absolute;
+  inset: 10px;
+  border-radius: calc(var(--radius) - 10px);
+  border: 1px solid rgba(255,242,168,.20);
+  pointer-events:none;
+}
+.frame::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(900px 400px at 50% 60%, rgba(30,227,255,.08), transparent 60%);
+  pointer-events:none;
+}
+
+.stage{
+  padding: 18px 18px 20px;
+}
+.stageText{
+  position:relative;
+  text-align:center;
+  padding: 8px 10px 4px;
+}
+.stageLead{
+  margin:0;
+  font-size: 18px;
+  line-height:1.8;
+  color: rgba(255,255,255,.88);
+  text-shadow: 0 0 18px rgba(0,0,0,.5);
+}
+.stageLead .em{
+  display:inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,242,168,.25);
+  background: rgba(255,242,168,.08);
+  color: rgba(255,242,168,.95);
+}
+.stageHint{
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ====== BOARD ====== */
+.board{
+  margin-top: 16px;
+  display:grid;
+  gap: 16px;
+}
+
+.ring{
+  position:relative;
+  height: 460px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(600px 420px at 50% 45%, rgba(255,255,255,.05), transparent 60%),
+    radial-gradient(900px 420px at 70% 70%, rgba(182,140,255,.08), transparent 60%),
+    radial-gradient(900px 420px at 20% 70%, rgba(30,227,255,.06), transparent 60%),
+    rgba(0,0,0,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+  overflow:hidden;
+}
+
+/* カード */
+.card{
+  position:absolute;
+  width: 120px;
+  height: 170px;
+  border-radius: 12px;
+  cursor:pointer;
+  transform-origin: center center;
+  perspective: 800px;
+  user-select:none;
+}
+.cardInner{
+  width:100%;
+  height:100%;
+  border-radius: 12px;
+  position:relative;
+  transform-style: preserve-3d;
+  transition: transform .5s ease, filter .25s ease;
+  filter: drop-shadow(0 16px 26px rgba(0,0,0,.45));
+}
+
+/* 裏面（ワイン色＋魔法陣風） */
+.cardBack, .cardFront{
+  position:absolute;
+  inset:0;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  border: 2px solid rgba(255,242,168,.55);
+  overflow:hidden;
+}
+.cardBack{
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.10), transparent 55%),
+    linear-gradient(180deg, var(--wine), var(--wine2));
+}
+.cardBack::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,242,168,.18), transparent 52%),
+    conic-gradient(from 0deg, rgba(255,242,168,.16), transparent, rgba(255,242,168,.10), transparent);
+  opacity:.75;
+  transform: rotate(15deg);
+}
+.cardBack::after{
+  content:"";
+  position:absolute;
+  inset:10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,242,168,.25);
+}
+
+/* 表面 */
+.cardFront{
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.20), transparent 45%),
+    linear-gradient(180deg, rgba(255,242,168,.18), rgba(0,0,0,.15)),
+    rgba(10,10,24,.88);
+}
+.faceTitle{
+  position:absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  font-weight: 900;
+  letter-spacing:.06em;
+  font-size: 12px;
+  color: rgba(255,242,168,.95);
+  text-shadow: 0 0 12px rgba(255,242,168,.18);
+}
+.faceIcon{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size: 64px;
+  opacity:.95;
+  text-shadow: 0 0 26px rgba(30,227,255,.18), 0 0 40px rgba(182,140,255,.15);
+}
+.faceElem{
+  position:absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  text-align:center;
+  font-size: 12px;
+  color: rgba(255,255,255,.82);
+}
+
+/* hover/selected */
+.card:hover .cardInner{
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,.55)) brightness(1.05);
+}
+.card.disabled{ cursor:not-allowed; opacity:.55; }
+.card.selected .cardInner{
+  box-shadow: 0 0 0 4px rgba(34,197,94,.18);
+  filter: drop-shadow(0 24px 40px rgba(0,0,0,.6));
+}
+
+/* シャッフル中の揺れ */
+.card.shuffling .cardInner{
+  animation: wobble .35s ease-in-out infinite;
+}
+@keyframes wobble{
+  0%{ transform: rotate(0deg) scale(1); }
+  50%{ transform: rotate(2deg) scale(1.02); }
+  100%{ transform: rotate(-2deg) scale(1); }
+}
+
+/* リヴェール */
+.card.revealed .cardInner{
+  transform: rotateY(180deg);
+}
+
+.controls{
+  display:flex;
+  gap: 10px;
+  justify-content: center;
+  align-items:center;
+  flex-wrap: wrap;
+}
+
+.btnGold{
+  border:none;
+  cursor:pointer;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-weight: 900;
+  letter-spacing:.10em;
+  color: #2b1203;
+  background: linear-gradient(180deg, var(--gold1), var(--gold2) 55%, var(--gold3));
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.35),
+    0 0 30px rgba(255,242,168,.18);
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+}
+.btnGold:hover{ filter: brightness(1.06); box-shadow: 0 18px 48px rgba(0,0,0,.42), 0 0 46px rgba(255,242,168,.22); }
+.btnGold:active{ transform: translateY(2px); }
+
+.btnGhost{
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-weight: 900;
+  letter-spacing:.08em;
+  cursor:pointer;
+  color: rgba(255,255,255,.92);
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  transition: .2s ease;
+}
+.btnGhost:hover{ box-shadow: 0 0 0 4px rgba(30,227,255,.14); }
+.btnGhost:active{ transform: translateY(2px); }
+
+.pickedArea{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.18);
+  padding: 12px;
+}
+.pickedTitle{
+  font-weight: 900;
+  letter-spacing:.08em;
+  color: rgba(255,242,168,.9);
+  margin-bottom: 10px;
+}
+.pickedSlots{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px;
+}
+.slot{
+  border-radius: 14px;
+  border: 1px dashed rgba(255,242,168,.25);
+  background: rgba(255,255,255,.04);
+  padding: 12px 10px;
+  text-align:center;
+  color: rgba(255,255,255,.78);
+  min-height: 76px;
+  display:grid;
+  place-items:center;
+}
+.slot strong{
+  display:block;
+  margin-top: 6px;
+  color: rgba(255,242,168,.95);
+}
+
+.frameMini{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.20);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+
+.result{
+  padding: 12px;
+}
+.resultTitle{
+  margin: 0 0 10px;
+  font-size: 18px;
+  letter-spacing:.08em;
+  background: linear-gradient(90deg, rgba(255,242,168,.95), rgba(30,227,255,.88), rgba(182,140,255,.88));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.resultEmpty{
+  margin:0;
+  color: rgba(255,255,255,.72);
+}
+.resultGrid{
+  display:grid;
+  gap: 10px;
+}
+.resultCard{
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  padding: 12px;
+}
+.resultCard h3{
+  margin:0 0 6px;
+  font-size: 14px;
+  letter-spacing:.08em;
+  color: rgba(255,242,168,.92);
+}
+.resultCard p{
+  margin:0;
+  color: rgba(255,255,255,.82);
+  line-height:1.7;
+  font-size: 14px;
+}
+.tagRow{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.16);
+  color: rgba(255,255,255,.82);
+  font-size: 12px;
+}
+
+/* footer */
+.footerCopy{
+  margin-top: 16px;
+  text-align:center;
+  padding: 10px 6px 0;
+}
+.footerLine{
+  color: rgba(255,255,255,.85);
+  letter-spacing:.10em;
+  font-weight: 900;
+}
+.footerBig{
+  margin-top: 6px;
+  font-size: 26px;
+  letter-spacing:.08em;
+  background: linear-gradient(180deg, var(--gold1), var(--gold2) 55%, var(--gold3));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow: 0 0 30px rgba(255,242,168,.16);
+}
+
+/* responsive */
+@media (max-width: 680px){
+  .ring{ height: 420px; }
+  .card{ width: 105px; height: 150px; }
+  .pickedSlots{ grid-template-columns: 1fr; }
+}
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <header class="hero">
+    <div class="heroTopLine">期間限定　診断0円！</div>
+    <div class="heroCatch">驚きの的中率を叩き出す!? 話題の新占術!!</div>
+
+    <h1 class="heroTitle">
+      <span class="titleGlow">エレメントタロット</span>
+    </h1>
+
+    <div class="heroSub">Element × Tarot</div>
+  </header>
+
+  <main class="stageWrap">
+    <section class="stage frame">
+      <div class="stageText">
+        <p class="stageLead">
+          エレメントタロットで占いたいことを<br />
+          心のなかで唱え、<br />
+          <span class="em">「シャッフル開始」</span>をクリックしてください
+        </p>
+        <p class="stageHint" id="stageHint">
+          シャッフル後、カードを <strong>3枚</strong> 選ぶと結果が表示されます
+        </p>
+      </div>
+
+      <div class="board">
+        <!-- 円形配置のカード -->
+        <div class="ring" id="ring" aria-label="タロットカードの山（クリックで選択）">
+          <!-- JSで12枚生成 -->
+        </div>
+
+        <div class="controls">
+          <button class="btnGold" id="shuffleBtn" type="button">シャッフル開始</button>
+          <button class="btnGhost" id="resetBtn" type="button">やり直す</button>
+        </div>
+
+        <div class="pickedArea" aria-label="選んだカード">
+          <div class="pickedTitle">あなたが選んだカード</div>
+          <div class="pickedSlots" id="pickedSlots">
+            <div class="slot">1枚目</div>
+            <div class="slot">2枚目</div>
+            <div class="slot">3枚目</div>
+          </div>
+        </div>
+
+        <section class="result frameMini" id="result" aria-live="polite">
+          <h2 class="resultTitle">占い結果</h2>
+          <div class="resultBody" id="resultBody">
+            <p class="resultEmpty">カードを3枚選ぶと結果が表示されます。</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer class="footerCopy">
+      <div class="footerLine">口コミで話題沸騰中！</div>
+      <div class="footerBig">「エレメントタロット」の秘密とは…？</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+const ring = document.getElementById("ring");
+const shuffleBtn = document.getElementById("shuffleBtn");
+const resetBtn = document.getElementById("resetBtn");
+const pickedSlots = document.getElementById("pickedSlots");
+const resultBody = document.getElementById("resultBody");
+const stageHint = document.getElementById("stageHint");
+
+const CARD_COUNT = 12;
+const PICK_MAX = 3;
+
+let isShuffling = false;
+let shuffledOnce = false;
+let picked = []; // {idx, data}
+
+const TAROT = [
+  { name:"愚者", emoji:"🃏", element:"風", keywords:["自由","直感","スタート"], msg:"今は『やってみる』が正解。完璧より一歩。" },
+  { name:"魔術師", emoji:"✨", element:"火", keywords:["創造","行動","集中"], msg:"資源は揃っている。意志を一点に集めると現実が動く。" },
+  { name:"女教皇", emoji:"🌙", element:"水", keywords:["洞察","静けさ","本質"], msg:"答えは内側にある。急がず観察すれば真実が見える。" },
+  { name:"女帝", emoji:"🌿", element:"地", keywords:["豊かさ","育成","安心"], msg:"育てるほど増える。自分にも優しさを配って。" },
+  { name:"皇帝", emoji:"🛡️", element:"火", keywords:["決断","秩序","責任"], msg:"境界線を引くと安定する。主導権を握ろう。" },
+  { name:"恋人", emoji:"💞", element:"風", keywords:["選択","調和","対話"], msg:"迷いは『どちらが心地よいか』でほどける。" },
+  { name:"戦車", emoji:"🏇", element:"火", keywords:["前進","突破","勝負"], msg:"勢いが味方。怖さより『推進力』を信じて。" },
+  { name:"力", emoji:"🦁", element:"火", keywords:["信頼","継続","優しさ"], msg:"力は強さより『扱い方』。丁寧さが勝つ。" },
+  { name:"隠者", emoji:"🕯️", element:"地", keywords:["探求","整理","自分時間"], msg:"いまは内省で精度UP。余白が答えを連れてくる。" },
+  { name:"運命の輪", emoji:"🎡", element:"風", keywords:["転機","流れ","タイミング"], msg:"流れが変わる合図。小さく乗って大きく進める。" },
+  { name:"星", emoji:"⭐", element:"風", keywords:["希望","回復","未来"], msg:"焦らなくていい。続けた人に追い風が来る。" },
+  { name:"太陽", emoji:"☀️", element:"火", keywords:["成功","明るさ","解放"], msg:"素直さが運を呼ぶ。見せたいものを堂々と。" },
+];
+
+function shuffleArray(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function setHint(text){
+  stageHint.textContent = text;
+}
+
+// 位置だけ再計算（リサイズ用）
+function layoutCards(){
+  const cards = [...ring.querySelectorAll(".card")];
+  if(cards.length === 0) return;
+
+  const angles = Array.from({length:CARD_COUNT}, (_,i)=> (360/CARD_COUNT)*i);
+  const radius = 160;
+  const cx = ring.clientWidth/2;
+  const cy = ring.clientHeight/2;
+
+  cards.forEach((card, i) => {
+    const ang = angles[i] * (Math.PI/180);
+
+    // 現在のカードサイズを参照（レスポンシブ対応）
+    const w = card.offsetWidth || 120;
+    const h = card.offsetHeight || 170;
+
+    const x = cx + Math.cos(ang)*radius - w/2;
+    const y = cy + Math.sin(ang)*radius - h/2;
+    const rot = angles[i] + 90;
+
+    card.style.left = `${x}px`;
+    card.style.top  = `${y}px`;
+    card.style.transform = `rotate(${rot}deg)`;
+  });
+}
+
+function buildCards(){
+  ring.innerHTML = "";
+  for(let i=0;i<CARD_COUNT;i++){
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.idx = String(i);
+
+    const inner = document.createElement("div");
+    inner.className = "cardInner";
+
+    const back = document.createElement("div");
+    back.className = "cardBack";
+
+    const front = document.createElement("div");
+    front.className = "cardFront";
+    front.innerHTML = `
+      <div class="faceTitle">Element Tarot</div>
+      <div class="faceIcon" aria-hidden="true">⭐</div>
+      <div class="faceElem">—</div>
+    `;
+
+    inner.appendChild(back);
+    inner.appendChild(front);
+    card.appendChild(inner);
+
+    card.addEventListener("click", onCardClick);
+    ring.appendChild(card);
+  }
+
+  // 追加後に配置計算
+  layoutCards();
+}
+
+let cardDeck = []; // idx -> tarot data
+
+function applyDeckToCards(deck){
+  const cards = [...ring.querySelectorAll(".card")];
+  cards.forEach((c, i) => {
+    const front = c.querySelector(".cardFront");
+    const icon = front.querySelector(".faceIcon");
+    const elem = front.querySelector(".faceElem");
+    const d = deck[i];
+    if(d){
+      icon.textContent = d.emoji;
+      elem.textContent = `Element: ${d.element}`;
+    }else{
+      icon.textContent = "⭐";
+      elem.textContent = "—";
+    }
+  });
+}
+
+function assignTarotToCards(){
+  const shuffled = shuffleArray(TAROT).slice(0, CARD_COUNT);
+  cardDeck = shuffled;
+  applyDeckToCards(cardDeck);
+}
+
+function updateCardDisabledState(){
+  const cards = [...ring.querySelectorAll(".card")];
+  const disable = !shuffledOnce || picked.length >= PICK_MAX;
+  cards.forEach(c => {
+    const idx = Number(c.dataset.idx);
+    const already = picked.some(p => p.idx === idx);
+    c.classList.toggle("disabled", disable && !already);
+  });
+}
+
+function startShuffle(){
+  if(isShuffling) return;
+
+  isShuffling = true;
+  setHint("シャッフル中…心のなかで占いたいことを唱えてください");
+
+  const cards = [...ring.querySelectorAll(".card")];
+  cards.forEach(c => c.classList.add("shuffling"));
+
+  const original = cards.map(c => ({ left:c.style.left, top:c.style.top, tf:c.style.transform }));
+  const duration = 1400;
+
+  const t0 = performance.now();
+  function anim(now){
+    const p = Math.min(1, (now - t0)/duration);
+    cards.forEach((c, i) => {
+      const jitter = 10 + Math.random()*18;
+      const dx = (Math.random()*2-1)*jitter;
+      const dy = (Math.random()*2-1)*jitter;
+      const rot = (Math.random()*2-1)*6;
+
+      c.style.left = `calc(${original[i].left} + ${dx}px)`;
+      c.style.top  = `calc(${original[i].top} + ${dy}px)`;
+      c.style.transform = `${original[i].tf} rotate(${rot}deg)`;
+    });
+
+    if(p < 1){
+      requestAnimationFrame(anim);
+    }else{
+      // シャッフル完了：カードの「意味割り当て」をシャッフル
+      assignTarotToCards();
+      cards.forEach((c,i) => {
+        c.classList.remove("shuffling");
+        c.style.left = original[i].left;
+        c.style.top  = original[i].top;
+        c.style.transform = original[i].tf;
+      });
+      isShuffling = false;
+      shuffledOnce = true;
+      shuffleBtn.textContent = "シャッフル終了";
+      setHint("OK！カードを3枚選んでください（クリック）");
+      updateCardDisabledState();
+    }
+  }
+  requestAnimationFrame(anim);
+}
+
+function onCardClick(e){
+  const card = e.currentTarget;
+  const idx = Number(card.dataset.idx);
+
+  if(!shuffledOnce || isShuffling) return;
+  if(picked.length >= PICK_MAX) return;
+  if(picked.some(p => p.idx === idx)) return;
+
+  const data = cardDeck[idx];
+  picked.push({ idx, data });
+
+  card.classList.add("selected", "revealed");
+
+  renderPickedSlots();
+  updateCardDisabledState();
+
+  if(picked.length === PICK_MAX){
+    renderResult();
+    setHint("結果が出ました！「やり直す」で再度占えます。");
+  }
+}
+
+function renderPickedSlots(){
+  const slots = [...pickedSlots.querySelectorAll(".slot")];
+  slots.forEach((s, i) => {
+    const p = picked[i];
+    if(!p){
+      s.innerHTML = `${i+1}枚目`;
+      return;
+    }
+    s.innerHTML = `
+      <div>
+        <div style="font-size:22px;">${p.data.emoji}</div>
+        <strong>${p.data.name}</strong>
+        <div style="font-size:12px;opacity:.8;margin-top:4px;">${p.data.element}</div>
+      </div>
+    `;
+  });
+}
+
+function renderResult(){
+  const labels = ["過去", "現在", "未来"];
+  resultBody.innerHTML = `
+    <div class="resultGrid">
+      ${picked.map((p, i) => `
+        <article class="resultCard">
+          <h3>${labels[i]}：${p.data.emoji} ${p.data.name}</h3>
+          <p>${p.data.msg}</p>
+          <div class="tagRow">
+            <span class="tag">Element：${p.data.element}</span>
+            ${p.data.keywords.map(k => `<span class="tag">#${k}</span>`).join("")}
+          </div>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
+function resetAll(){
+  picked = [];
+  shuffledOnce = false;
+  shuffleBtn.textContent = "シャッフル開始";
+  setHint("シャッフル後、カードを3枚選ぶと結果が表示されます");
+
+  [...ring.querySelectorAll(".card")].forEach(c => {
+    c.classList.remove("selected", "revealed", "disabled");
+  });
+
+  [...pickedSlots.querySelectorAll(".slot")].forEach((s, i) => {
+    s.innerHTML = `${i+1}枚目`;
+  });
+
+  resultBody.innerHTML = `<p class="resultEmpty">カードを3枚選ぶと結果が表示されます。</p>`;
+}
+
+shuffleBtn.addEventListener("click", () => {
+  if(isShuffling) return;
+
+  if(picked.length > 0){
+    resetAll();
+  }
+  startShuffle();
+});
+
+resetBtn.addEventListener("click", () => {
+  resetAll();
+});
+
+window.addEventListener("load", () => {
+  buildCards();
+  assignTarotToCards(); // 初期割り当て（ただしシャッフル前は選べない）
+  updateCardDisabledState();
+});
+
+// リサイズで円配置だけ更新（選択状態は維持）
+window.addEventListener("resize", () => {
+  layoutCards();
+});
+</script>
+</body>
+</html>
